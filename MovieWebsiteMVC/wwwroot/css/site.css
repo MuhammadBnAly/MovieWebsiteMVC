@@ -88,3 +88,8 @@ input::-webkit-inner-spin-button{
 input[type=number]{
     -moz-appearance:textfield;
 }
+
+/*font size of validation*/
+.field-validation-error{
+    font-size:14px;
+}

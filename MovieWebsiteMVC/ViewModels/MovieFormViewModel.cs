@@ -13,6 +13,7 @@ namespace MovieWebsiteMVC.ViewModels
         public double Rate { get; set; }
         [Required, StringLength(250)]
         public string StoreLine { get; set; }
+        [Display(Name = "Select Poster...")]
         public byte[] Poster { get; set; }
         [Display(Name ="Category")]
         public byte CategoryId { get; set; }

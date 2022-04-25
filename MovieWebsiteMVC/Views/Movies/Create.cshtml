@@ -8,7 +8,7 @@
 
 <hr />
 
-<section class="row">
+<section class="row justify-content-between">
     <div class="col-md-4">
         <form method="post" asp-action="Create">
             <!--Title-->
@@ -46,8 +46,56 @@
                 <textarea class="form-control" asp-for="StoreLine" maxlength="2500" rows="5" ></textarea>
                 <span class="text-danger" asp-validation-for="StoreLine" ></span>
             </div>
-
+            <!--Poster-->
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" asp-for="Poster" accept=".jpg , .png" />
+                <label class="custom-file-label" asp-for="Poster"></label>
+                <span class="text-danger" asp-validation-for="Poster" ></span>
+            </div>
+            <!--Buttons-->
+            <button type="submit" class="btn btn-primary mt-4">
+                <i class="bi bi-check"></i>
+                Save
+            </button> 
+            <a class="btn btn-outline-secondary mt-4" asp-action="Index">
+                <i class="bi bi-x"></i>
+                Cancel
+            </a>
         </form>
+    </div>
+
+    <div class="col-md-4">
+        <div id="poster-container" class="d-none">
+            <img src="" alt="Poster" class="img-thumbnail" />
+        </div>
     </div>
 </section>
 
+@section scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $(document).ready(function (){
+            $('#Poster').on('change', function(){
+                var selectedFile = $(this).val().split('\\').pop();
+                $(this).siblings('label').text(selectedFile);
+
+                //image
+                var posterContainer = $('#poster-container');
+                var image = window.URL.createObjectURL(this.files[0]);
+                posterContainer.removeClass('d-none');
+                posterContainer.find('img').attr('src', image);
+            });
+
+            $('#Year').datepicker({
+                format:'yyyy',
+                viewMode:'years',
+                minViewMode:'years',
+                autoClose:true,
+                startDate:new Date('1950-01-01'),
+                endDate:new Date()
+            });
+        });
+    </script>
+}

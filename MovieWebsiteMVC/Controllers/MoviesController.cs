@@ -1,6 +1,10 @@
 ﻿using MovieWebsiteMVC.Models;
 using MovieWebsiteMVC.Models.Data;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using MovieWebsiteMVC.ViewModels;
+using System.Linq;
 
 namespace MovieWebsiteMVC.Controllers
 {
@@ -11,9 +15,18 @@ namespace MovieWebsiteMVC.Controllers
         {
             this._context = context;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var movies = await _context.Movies.ToListAsync();
+            return View(movies);
+        }
+        public async Task<IActionResult> Create()
+        {
+            var viewModel = new MovieFormViewModel
+            {
+                Categories = await _context.Categories.OrderBy(n => n.Name).ToListAsync()
+            };
+            return View(viewModel);
         }
     }
 }

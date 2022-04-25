@@ -1,8 +1,36 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<Movie>
+
 @{
+    ViewBag.Title = "Movies";
 }
+<h2>
+    <i class="bi bi-camera-reels"></i>
+    Movies
+</h2>
 
+<hr />
 
-<h3>Movies</h3>
+<a class="btn btn-primary" asp-action="Create">
+    <i class="bi bi-plus-lg"></i>
+    Add New Movie
+</a>
+
+<!--Display List of Movies-->
+<div class="mt-4">
+    @if (!Model.Any())
+    {
+        <div class="alert alert-warning" role="alert">
+          <i class="bi bi-exclamation-triangle"></i>
+            No Movies Found!
+        </div>
+    }
+    else
+    {
+        <ul>
+            @foreach(var movie in Model)
+            {
+                <li>@movie.Title  |  @movie.Rate</li>
+            }
+        </ul>
+    }
+</div>

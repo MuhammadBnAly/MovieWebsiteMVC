@@ -1,0 +1,53 @@
+﻿@model MovieFormViewModel
+
+@{
+    ViewBag.Title = "Movie Form";
+}
+
+<h2>Create New Movie</h2>
+
+<hr />
+
+<section class="row">
+    <div class="col-md-4">
+        <form method="post" asp-action="Create">
+            <!--Title-->
+            <div class="form-group">
+                <label class="text-muted" asp-for="Title"></label>
+                <input type="text" class="form-control" asp-for="Title" maxlength="250" />
+                <span class="text-danger" asp-validation-for="Title" ></span>
+            </div>
+            
+            <!--Categories-->
+            <div class="form-group">
+                <label class="text-muted" asp-for="CategoryId"></label>
+                <select class="form-control" asp-for="CategoryId" 
+                    asp-items="@(new SelectList(Model.Categories , "Id", "Name"))">
+                    <option></option>
+                </select>
+                <span class="text-danger" asp-validation-for="CategoryId" ></span>
+            </div>
+
+            <!--Year-->
+            <div class="form-group w-50">
+                <label class="text-muted" asp-for="Year"></label>
+                <input type="number" class="form-control" asp-for="Year" value="" />
+                <span class="text-danger" asp-validation-for="Year" ></span>
+            </div>
+            <!--Rate-->
+            <div class="form-group w-50">
+                <label class="text-muted" asp-for="Rate"></label>
+                <input type="number" class="form-control" asp-for="Rate" value="" />
+                <span class="text-danger" asp-validation-for="Rate" ></span>
+            </div>
+            <!--StoryLine-->
+            <div class="form-group">
+                <label class="text-muted" asp-for="StoreLine"></label>
+                <textarea class="form-control" asp-for="StoreLine" maxlength="2500" rows="5" ></textarea>
+                <span class="text-danger" asp-validation-for="StoreLine" ></span>
+            </div>
+
+        </form>
+    </div>
+</section>
+

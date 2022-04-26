@@ -93,3 +93,16 @@ input[type=number]{
 .field-validation-error{
     font-size:14px;
 }
+
+
+/* Retrieve poster from DB to Index*/
+.poster {
+    min-height:270px;
+    background-position:top;
+    background-size:100%;
+    transition:all 0.3s ease-in-out;
+}
+.poster:hover {
+    background-size: 130%;
+    transition: all 0.3s ease-in-out;
+}

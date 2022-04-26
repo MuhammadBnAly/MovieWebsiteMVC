@@ -1,16 +1,18 @@
-﻿@model MovieFormViewModel
+﻿@model AnimeFormViewModel
 
 @{
-    ViewBag.Title = "Movie Form";
+    ViewBag.Title = "Anime Form";
 }
 
-<h2>Create New Movie</h2>
+<h2>@(Model.Id > 0 ? "Edit " : "Create ")Anime </h2>
 
 <hr />
 
 <section class="row justify-content-between">
     <div class="col-md-4">
-        <form method="post" asp-action="Create">
+        <form method="post" asp-action="@(Model.Id > 0 ? "Edit" : "Create")" enctype="multipart/form-data">
+            <!--Id-->
+            <input hidden asp-for="Id" />
             <!--Title-->
             <div class="form-group">
                 <label class="text-muted" asp-for="Title"></label>
@@ -31,13 +33,15 @@
             <!--Year-->
             <div class="form-group w-50">
                 <label class="text-muted" asp-for="Year"></label>
-                <input type="number" class="form-control" asp-for="Year" value="" />
+                <input type="number" class="form-control" asp-for="Year" 
+                    value="@(Model.Year > 0 ? Model.Year : string.Empty)" />
                 <span class="text-danger" asp-validation-for="Year" ></span>
             </div>
             <!--Rate-->
             <div class="form-group w-50">
                 <label class="text-muted" asp-for="Rate"></label>
-                <input type="number" class="form-control" asp-for="Rate" value="" />
+                <input type="number" class="form-control" asp-for="Rate" 
+                    value="@(Model.Rate > 0 ? Model.Rate : string.Empty)" />
                 <span class="text-danger" asp-validation-for="Rate" ></span>
             </div>
             <!--StoryLine-->
@@ -48,7 +52,8 @@
             </div>
             <!--Poster-->
             <div class="custom-file">
-                <input type="file" class="custom-file-input" asp-for="Poster" accept=".jpg , .png" />
+                <!--<input type="file" class="custom-file-input" asp-for="Poster" accept=".jpg , .png" /> -->
+                <input type="file" class="custom-file-input" asp-for="Poster" />
                 <label class="custom-file-label" asp-for="Poster"></label>
                 <span class="text-danger" asp-validation-for="Poster" ></span>
             </div>

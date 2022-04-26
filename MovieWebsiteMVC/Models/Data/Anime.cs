@@ -2,7 +2,7 @@
 
 namespace MovieWebsiteMVC.Models.Data
 {
-    public class Movie
+    public class Anime
     {
         public int Id { get; set; }
         public string Title { get; set; }

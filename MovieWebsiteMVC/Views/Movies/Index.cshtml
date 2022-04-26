@@ -1,19 +1,28 @@
-﻿@model IEnumerable<Movie>
+﻿@model IEnumerable<Anime>
 
 @{
-    ViewBag.Title = "Movies";
+    ViewBag.Title = "Animes";
 }
 <h2>
     <i class="bi bi-camera-reels"></i>
-    Movies
+    Animes
 </h2>
 
 <hr />
+<div class="d-flex flex-row justify-content-between">
+    <a class="btn btn-primary" asp-action="Create">
+        <i class="bi bi-plus-lg"></i>
+        Create Anime
+    </a>
 
-<a class="btn btn-primary" asp-action="Create">
-    <i class="bi bi-plus-lg"></i>
-    Add New Movie
-</a>
+    <div class="justify-content-between">
+        <b>Sorting By: </b>
+        <a class="btn " asp-action="sortByName">Name</a>
+        <a class="btn " asp-action="sortByRate">Rate</a>
+        <a class="btn " asp-action="sortByOlder">Older</a>
+        <a class="btn " asp-action="sortByNewer">Newer</a>
+    </div>
+</div>
 
 <!--Display List of Movies-->
 <div class="mt-4">
@@ -21,16 +30,79 @@
     {
         <div class="alert alert-warning" role="alert">
           <i class="bi bi-exclamation-triangle"></i>
-            No Movies Found!
+            No Animes Found!
         </div>
     }
     else
     {
-        <ul>
+        <div class="row">
             @foreach(var movie in Model)
             {
-                <li>@movie.Title  |  @movie.Rate</li>
+                <div class="col-12">
+                    <div class="card mb-3">
+                      <div class="row g-0">
+
+                          <!--Image-->
+                        <div class="col-md-3 poster" style="background-image:url(data:image\/*;base64,@(Convert.ToBase64String(movie.Poster)))">
+                        </div>
+                        <div class="col-md-9">
+                          <div class="card-body d-flex flex-column justify-content-between h-100">
+
+                              <!--Title & Content-->
+                              <div>
+                                <h5 class="card-title">@movie.Title | @movie.Year</h5>
+                                <p class="card-text justify-content">
+                                    @(movie.StoreLine.Length > 500 ? $"{movie.StoreLine.Substring(0, 500)} ... " : movie.StoreLine)
+                                </p>
+                              </div>
+
+                            <!--Rate-->
+                            <div class="d-flex justify-content-between">
+                                <p class="card-text mb-0 mt-2">
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <small class="text-muted">@movie.Rate.ToString("0.0")</small>
+                                </p>
+                                <div class="">
+                                    <a asp-action="Details" asp-route-id="@movie.Id" class="btn btn-outline-secondary">
+                                        <i class="bi bi-info"></i>
+                                        Details
+                                    </a>
+                                    <a asp-action="Edit" asp-route-id="@movie.Id" class="btn btn-outline-warning">
+                                        <i class="bi bi-pencil"></i>
+                                        Edit
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@movie.Id" class="btn btn-danger">
+                                        <i class="bi bi-trash"></i>
+                                        Delete
+                                    </a>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
             }
-        </ul>
+        </div>
     }
 </div>
+
+
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>

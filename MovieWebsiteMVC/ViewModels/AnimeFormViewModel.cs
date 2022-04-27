@@ -19,5 +19,6 @@ namespace MovieWebsiteMVC.ViewModels
         [Display(Name ="Category")]
         public byte CategoryId { get; set; }
         public IEnumerable<Category> Categories { get; set; }
+
     }
 }

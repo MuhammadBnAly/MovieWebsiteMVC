@@ -70,8 +70,9 @@
     </div>
 
     <div class="col-md-4">
-        <div id="poster-container" class="d-none">
-            <img src="" alt="Poster" class="img-thumbnail" />
+        <div id="poster-container" class="@(Model.Id > 0 ? string.Empty : "d-none")">
+            <img src="@(Model.Id > 0 ? $"data:image/*;base64, {Convert.ToBase64String(Model.Poster)}" 
+                : string.Empty )" alt="Poster" class="img-thumbnail" />
         </div>
     </div>
 </section>

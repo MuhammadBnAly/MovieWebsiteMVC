@@ -9,6 +9,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using NToastNotify.Libraries;
+using NToastNotify;
+using System.Reflection;
+using Microsoft.Extensions.FileProviders;
 
 namespace MovieWebsiteMVC
 {
@@ -28,6 +32,13 @@ namespace MovieWebsiteMVC
             services.AddDbContext<AppDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddMvc().AddNToastNotifyToastr(new ToastrOptions()
+            {
+                CloseButton = true,
+                ProgressBar = true,
+                PreventDuplicates = true,
+                PositionClass = ToastPositions.TopRight 
+            });
 
             services.AddControllersWithViews();
         }
